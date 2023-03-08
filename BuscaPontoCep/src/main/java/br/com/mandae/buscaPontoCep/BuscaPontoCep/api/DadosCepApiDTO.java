@@ -6,7 +6,7 @@ import lombok.Builder;
 
 
 @Builder
-public record DadosCepApi(
+public record DadosCepApiDTO(
 
          String adress,
          String postal_code,
@@ -18,10 +18,8 @@ public record DadosCepApi(
          String state,
          String id,
          String name,
+
          @JsonAlias({"social_name", "socialName"}) String socialName,
-
-         @JsonAlias({"postal_code", "postalCode"}) String postalcode,
-
          @JsonAlias ({"reference_point", "referencepoint"}) String referencepoint){
 
 

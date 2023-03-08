@@ -1,30 +1,38 @@
 package br.com.mandae.buscaPontoCep.BuscaPontoCep.CepController;
 
-import br.com.mandae.buscaPontoCep.BuscaPontoCep.api.DadosCepApi;
-import br.com.mandae.buscaPontoCep.BuscaPontoCep.api.DadosListagemPontos;
+import br.com.mandae.buscaPontoCep.BuscaPontoCep.api.DadosCepApiDTO;
+import br.com.mandae.buscaPontoCep.BuscaPontoCep.service.CepService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-
+@RestController
+@RequestMapping("/cep")
 public class BuscaCepController {
 
     @Autowired
-    private DadosListagemPontos dadosListagemPontos;
+    private CepService cepService;
     @Autowired
-    private DadosCepApi adress;
+    private DadosCepApiDTO adress;
 
     @Autowired
     private RestTemplate restTemplate;
 
 
-
-
-    @RequestMapping(value = "/cep/{postalcode}", method = RequestMethod.GET)
-    public DadosListagemPontos getBuscaCep(@PathVariable(value = "postalCode") String postalCode){
-        ResponseEntity<DadosListagemPontos> response =
-                this.restTemplate.getForEntity("https://pudo-api.pontodrops.com.br/businessunits/api/v1/business-units/nearby/" + adress.postal_code() + "/", DadosListagemPontos.class);
-        return response.getBody();
+    @ResponseBody
+    @GetMapping(value="/cep-pudos/{postal_code}")
+    public ResponseEntity<DadosCepApiDTO> getBuscaPonto(@PathVariable("postal_code")String postal_code){
+        DadosCepApiDTO dadosCepApiDTO = cepService.getCepService(postal_code);
+        return new ResponseEntity<DadosCepApiDTO>(dadosCepApiDTO, HttpStatus.OK);
     }
+
+
+   // @RequestMapping(value = "/cep/{postal_code}", method = RequestMethod.GET)
+   // public DadosListagemPontos getBuscaCep(@PathVariable(value = "postal_Code") String postalCode){
+        //ResponseEntity<DadosListagemPontos> response =
+          //      this.restTemplate.getForEntity(";
+        //return response.getBody();
+    //}
 }
