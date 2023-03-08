@@ -22,9 +22,9 @@ public class BuscaCepController {
 
 
     @ResponseBody
-    @GetMapping(value="/cep-pudos/{postal_code}")
-    public ResponseEntity<DadosCepApiDTO> getBuscaPonto(@PathVariable("postal_code")String postal_code){
-        DadosCepApiDTO dadosCepApiDTO = cepService.getCepService(postal_code);
+    @GetMapping(value="/cep-pudos/{postalcode}")
+    public ResponseEntity<DadosCepApiDTO> getBuscaPonto(@PathVariable("postalcode")String postalcode){
+        DadosCepApiDTO dadosCepApiDTO = cepService.getCepService(postalcode);
         return new ResponseEntity<DadosCepApiDTO>(dadosCepApiDTO, HttpStatus.OK);
     }
 

@@ -9,7 +9,6 @@ import lombok.Builder;
 public record DadosCepApiDTO(
 
          String adress,
-         String postal_code,
          String number,
          String complement,
          String district,
@@ -18,7 +17,7 @@ public record DadosCepApiDTO(
          String state,
          String id,
          String name,
-
+         @JsonAlias({"spostal_code", "postalcode"}) String postalcode,
          @JsonAlias({"social_name", "socialName"}) String socialName,
          @JsonAlias ({"reference_point", "referencepoint"}) String referencepoint){
 

@@ -5,11 +5,11 @@ import org.springframework.web.client.RestTemplate;
 
 public class CepService {
 
-    public DadosCepApiDTO getCepService(String postal_code){
+    public DadosCepApiDTO getCepService(String postalcode){
 
 
         return new RestTemplate()
-                .getForEntity("https://pudo-api.pontodrops.com.br/businessunits/api/v1/business-units/nearby/" + postal_code + "?max_distance_in_meters=10000", DadosCepApiDTO.class).getBody();
+                .getForEntity("https://pudo-api.pontodrops.com.br/businessunits/api/v1/business-units/nearby/" + postalcode + "?max_distance_in_meters=10000", DadosCepApiDTO.class).getBody();
 
 
     }
